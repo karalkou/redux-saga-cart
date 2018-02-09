@@ -12,6 +12,7 @@ import { getQuery } from './utility'
 import { reducer } from './combineReducers';
 import { defaultState } from './defaultState'
 import createSagaMiddleware from 'redux-saga';
+import { initSagas } from "./initSagas";
 
 const stateTransformer = (state) => {
     if (Iterable.isIterable(state)) return state.toJS();
@@ -35,5 +36,8 @@ export const getStore = ()=>{
         defaultState,
         enhancer
     );
+
+    initSagas(sagaMiddleware);
+
     return store;
 };
